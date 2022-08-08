@@ -3,3 +3,18 @@ body {
     justify-content: center;
     background-color:  white;
 }    
+
+#gameContainer {
+    display: grid;
+    align-items: center;
+    grid-template: 100px 100px 100px / 100px 100px 100px;
+}
+.ticTacBox {
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: x-large;
+    height: 100px;
+}
