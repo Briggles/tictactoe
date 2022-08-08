@@ -1,21 +1,32 @@
 let gameBoard = (function() {
     let gameBoardArray = [
-    ['X', 'X', 'O'],
-    ['O', 'X', 'X'],
-    ['O', 'O', 'X']];
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']];
     let ticTacContainer = document.getElementById('gameContainer');
 
     const placeMarker = (x, y, value) => {
         console.log(gameBoardArray[x][y]);
-        gameBoardArray[x][y] = value;
+        if (gameBoardArray[x][y] === '') {
+            gameBoardArray[x][y] = value;
+            togglePlayer();
+    }
         drawBoard();
+    }
+
+    const togglePlayer = () => {
+        if (currentPlayer === playerA) {
+            currentPlayer = playerB;
+        }
+        else {
+            currentPlayer = playerA;
+        }
     }
 
     const clearDisplay = (display) => {
         while (ticTacContainer.firstChild) {
           ticTacContainer.removeChild(ticTacContainer.lastChild);
         }}
-
 
     const drawBoard = () => {
         clearDisplay(ticTacContainer);
@@ -28,9 +39,8 @@ let gameBoard = (function() {
                 ticTacBox.textContent = gameBoardArray[i][j];
                 ticTacBox.addEventListener('click', () => {
                     console.log(i);
-                    placeMarker(i, j, 'poop');
+                    placeMarker(i, j, currentPlayer.marker);
                 });
-
                 ticTacContainer.appendChild(ticTacBox);
             }
         }
@@ -41,5 +51,11 @@ let gameBoard = (function() {
     };
 })();
 
-//gameBoard;
+const Player = (name, marker) => {
+    return { name, marker };
+};
+
 gameBoard.drawBoard();
+playerA = Player('Player 1', 'X');
+playerB = Player('Player 2', 'O');
+let currentPlayer = playerA;
