@@ -38,31 +38,48 @@ let gameBoard = (function() {
                 console.log(gameBoardArray[i][j]);
                 ticTacBox.textContent = gameBoardArray[i][j];
                 ticTacBox.addEventListener('click', () => {
-                    console.log(i);
                     placeMarker(i, j, currentPlayer.marker);
                 });
                 ticTacContainer.appendChild(ticTacBox);
             }
         }
+        
+        drawNames();
+    }
+
+    const drawNames = () => {
         const firstPlayer = document.getElementById('firstPlayer');
         const secondPlayer = document.getElementById('secondPlayer');
         if (currentPlayer === playerA) firstPlayer.style.fontWeight = 'bold';
         else firstPlayer.style.fontWeight = 'normal';
         if (currentPlayer === playerB) secondPlayer.style.fontWeight = 'bold';
         else secondPlayer.style.fontWeight = 'normal';
-
         firstPlayer.textContent = playerA.name + ": " + playerA.marker;
         secondPlayer.textContent = playerB.name + ": " + playerB.marker;
     }
 
+
     return {
-        drawBoard,
+        drawBoard, drawNames,
     };
 })();
 
 const Player = (name, marker) => {
     return { name, marker };
 };
+
+const nameListener = (function() {
+    firstPlayer.addEventListener('click', () => {
+        playerA.name = prompt('Enter player name: ', 'Player 1');
+        gameBoard.drawNames();
+    });
+
+    secondPlayer.addEventListener('click', () => {
+        playerB.name = prompt('Enter player name: ', 'Player 2');
+        gameBoard.drawNames();
+    });
+
+})();
 
 playerA = Player('Player 1', 'X');
 playerB = Player('Player 2', 'O');

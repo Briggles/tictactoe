@@ -20,3 +20,7 @@ body {
     font-size: x-large;
     height: 100px;
 }
+
+#firstPlayer, secondPlayer {
+    padding: 20px;
+}
