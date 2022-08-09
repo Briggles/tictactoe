@@ -44,6 +44,15 @@ let gameBoard = (function() {
                 ticTacContainer.appendChild(ticTacBox);
             }
         }
+        const firstPlayer = document.getElementById('firstPlayer');
+        const secondPlayer = document.getElementById('secondPlayer');
+        if (currentPlayer === playerA) firstPlayer.style.fontWeight = 'bold';
+        else firstPlayer.style.fontWeight = 'normal';
+        if (currentPlayer === playerB) secondPlayer.style.fontWeight = 'bold';
+        else secondPlayer.style.fontWeight = 'normal';
+
+        firstPlayer.textContent = playerA.name + ": " + playerA.marker;
+        secondPlayer.textContent = playerB.name + ": " + playerB.marker;
     }
 
     return {
@@ -55,7 +64,7 @@ const Player = (name, marker) => {
     return { name, marker };
 };
 
-gameBoard.drawBoard();
 playerA = Player('Player 1', 'X');
 playerB = Player('Player 2', 'O');
 let currentPlayer = playerA;
+gameBoard.drawBoard();
