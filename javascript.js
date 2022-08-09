@@ -6,14 +6,41 @@ let gameBoard = (function() {
     let ticTacContainer = document.getElementById('gameContainer');
 
     const placeMarker = (x, y, value) => {
-        console.log(gameBoardArray[x][y]);
         if (gameBoardArray[x][y] === '') {
             gameBoardArray[x][y] = value;
+            checkVictory(x, y, value);
             togglePlayer();
-    }
-        drawBoard();
+            drawBoard();
+        }
     }
 
+    const checkVictory = (x, y, marker) => {
+            if (gameBoardArray[x][0] === marker && //check for 3 in row
+                gameBoardArray[x][1] === marker &&
+                gameBoardArray[x][2] === marker) {
+                drawBoard();
+                alert(currentPlayer.name + " wins!");
+            }
+            if (gameBoardArray[0][y] === marker && //check for 3 in column
+            gameBoardArray[1][y] === marker &&
+            gameBoardArray[2][y] === marker) {
+            drawBoard();
+            alert(currentPlayer.name + " wins!");
+        }
+        if (gameBoardArray[0][0] === marker && //check diag 1
+        gameBoardArray[1][1] === marker &&
+        gameBoardArray[2][2] === marker) {
+        drawBoard();
+        alert(currentPlayer.name + " wins!");
+    }
+    if (gameBoardArray[0][2] === marker && //check for diag 2
+    gameBoardArray[1][1] === marker &&
+    gameBoardArray[2][0] === marker) {
+    drawBoard();
+    alert(currentPlayer.name + " wins!");
+}
+    }
+    
     const togglePlayer = () => {
         if (currentPlayer === playerA) {
             currentPlayer = playerB;
@@ -35,7 +62,7 @@ let gameBoard = (function() {
                 let ticTacBox = document.createElement('div');
                 ticTacBox.className = 'ticTacBox';
                 ticTacBox.id = 'row' + i + 'col' + j;
-                console.log(gameBoardArray[i][j]);
+               // console.log(gameBoardArray[i][j]);
                 ticTacBox.textContent = gameBoardArray[i][j];
                 ticTacBox.addEventListener('click', () => {
                     placeMarker(i, j, currentPlayer.marker);
