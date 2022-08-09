@@ -24,3 +24,6 @@ body {
 #firstPlayer, secondPlayer {
     padding: 20px;
 }
+#newGame {
+    padding: 20px;
+}

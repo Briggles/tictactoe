@@ -1,9 +1,20 @@
+const firstPlayer = document.getElementById('firstPlayer');
+const secondPlayer = document.getElementById('secondPlayer');
+const newGameBtn = document.getElementById('newGameBtn');
+
 let gameBoard = (function() {
     let gameBoardArray = [
     ['', '', ''],
     ['', '', ''],
     ['', '', '']];
     let ticTacContainer = document.getElementById('gameContainer');
+
+    const resetGame = () => {
+        gameBoardArray = [
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']];
+    }
 
     const placeMarker = (x, y, value) => {
         if (gameBoardArray[x][y] === '') {
@@ -81,8 +92,6 @@ let gameBoard = (function() {
     }
 
     const drawNames = () => {
-        const firstPlayer = document.getElementById('firstPlayer');
-        const secondPlayer = document.getElementById('secondPlayer');
         if (currentPlayer === playerA) firstPlayer.style.fontWeight = 'bold';
         else firstPlayer.style.fontWeight = 'normal';
         if (currentPlayer === playerB) secondPlayer.style.fontWeight = 'bold';
@@ -93,7 +102,7 @@ let gameBoard = (function() {
 
 
     return {
-        drawBoard, drawNames,
+        drawBoard, drawNames, resetGame,
     };
 })();
 
@@ -101,7 +110,7 @@ const Player = (name, marker) => {
     return { name, marker };
 };
 
-const nameListener = (function() {
+const Listener = (function() {
     firstPlayer.addEventListener('click', () => {
         playerA.name = prompt('Enter player name: ', 'Player 1');
         gameBoard.drawNames();
@@ -110,6 +119,14 @@ const nameListener = (function() {
     secondPlayer.addEventListener('click', () => {
         playerB.name = prompt('Enter player name: ', 'Player 2');
         gameBoard.drawNames();
+    });
+
+    newGameBtn.addEventListener('click', () => {
+      //  playerA = Player('Player 1', 'X');
+      //  playerB = Player('Player 2', 'O');
+        currentPlayer = playerA;
+        gameBoard.resetGame();
+        gameBoard.drawBoard();
     });
 
 })();
