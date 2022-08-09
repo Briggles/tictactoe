@@ -39,6 +39,12 @@ let gameBoard = (function() {
     drawBoard();
     alert(currentPlayer.name + " wins!");
 }
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            if (gameBoardArray[i][j] === '') return;
+        }
+    }
+    alert("Game is a draw!")
     }
     
     const togglePlayer = () => {
